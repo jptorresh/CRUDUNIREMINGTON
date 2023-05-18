@@ -47,7 +47,7 @@
         </form>
         <div class="col-8 p-4">
             <table class="table">
-                <thead class="bg-warning">
+                <thead class="bg-info">
                     <tr>
                         <th scope="col">Codigo</th>
                         <th scope="col">Nombre</th>
@@ -67,8 +67,8 @@
                         <td>Otto</td>
                         <td>@mdo</td>
                         <td>
-                            <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="">Eliminar</a>
+                            <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-trash"></i></a>
 
                         </td>
                     </tr>
