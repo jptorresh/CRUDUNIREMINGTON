@@ -11,11 +11,24 @@
     <script src="https://kit.fontawesome.com/1b9d46552b.js" crossorigin="anonymous"></script>
 </head>
 
+
+
 <body>
+    <script>
+        function eliminar(){
+            var respuesta=confirm("¿estas seguro que deseas eliminar?");
+            return respuesta
+        }
+
+    </script>
     <h1 class="text-center p3">Estudiantes Arquitectura de software</h1>
+    <?php
+    include "modelo/conexion.php";
+    include "controlador/eliminar.php"
+        ?>
 
     <div class="container-fluid row">
-        <form class="col-4 p-3">
+        <form class="col-4 p-3" method="POST">
             <h3 class="text-center text-secondary">Registro Estudiantes</h3>
             <div class="mb-3">
                 <label for="codigo" class="form-label">Codigo del estudiante</label>
@@ -42,12 +55,16 @@
                 <input type="text" class="form-control" name="ciudad">
             </div>
 
+            <?php
 
-            <button type="submit" class="btn btn-primary">Registrar</button>
+            include "controlador/registro_persona.php";
+
+            ?>
+            <button type="submit" class="btn btn-primary" name="btnregistrar" value="ok">Registrar</button>
         </form>
         <div class="col-8 p-4">
             <table class="table">
-                <thead class="bg-info">
+                <thead class="bg-warning">
                     <tr>
                         <th scope="col">Codigo</th>
                         <th scope="col">Nombre</th>
@@ -59,19 +76,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <a href="" class="btn btn-small btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="" class="btn btn-small btn-danger"><i class="fa-solid fa-trash"></i></a>
+                    <?php
+                    include "MODELO/conexion.php";
+                    $sql = $conexion->query(" select * from estudiante ");
+                    while ($datos = $sql->fetch_object()) { ?>
+                        <tr>
 
-                        </td>
-                    </tr>
+                            <td>
+                                <?= $datos->CODIGO ?>
+                            </td>
+                            <td>
+                                <?= $datos->NOMBRE ?>
+                            </td>
+                            <td>
+                                <?= $datos->APELLIDO ?>
+                            </td>
+                            <td>
+                                <?= $datos->CORREO ?>
+                            </td>
+                            <td>
+                                <?= $datos->CELULAR ?>
+                            </td>
+                            <td>
+                                <?= $datos->CIUDAD ?>
+                            </td>
+                            <td>
+                                <a href="editar.php?id=<?= $datos->CODIGO ?>" class="btn btn-small btn-warning"><i
+                                        class="fa-solid fa-pen-to-square"></i></a>
+                                <a onclick="return eliminar()" href="index.php?id=<?= $datos->CODIGO ?>" class="btn btn-small btn-danger"><i
+                                        class="fa-solid fa-trash"></i></a>
+
+                            </td>
+                        </tr>
+                    <?php }
+                    ?>
 
                 </tbody>
             </table>
